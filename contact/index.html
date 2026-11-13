@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="en" data-theme="light" data-lens="all"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Say hi · Megha Pareek</title><meta name="description" content="How to reach Megha Pareek, and the roles she is open to."><link rel="canonical" href="https://pareekmegha.github.io/contact/"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta property="og:type" content="website"><meta property="og:title" content="Say hi · Megha Pareek"><meta property="og:description" content="How to reach Megha Pareek, and the roles she is open to."><meta property="og:url" content="https://pareekmegha.github.io/contact/"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.B1s6EZz0.js"></script><script>
+      // Applies the saved theme and role lens before paint, and again after each page transition,
+      // because a transition replaces the <html> attributes with the new page's defaults.
+      (function () {
+        var lenses = ['all', 'analytics', 'science', 'engineering', 'ai'];
+        function read(store, key) {
+          try {
+            return store.getItem(key);
+          } catch (e) {
+            return null;
+          }
+        }
+        function apply() {
+          var root = document.documentElement;
+          root.dataset.theme = read(localStorage, 'theme') === 'dark' ? 'dark' : 'light';
+          var lens = new URLSearchParams(location.search).get('lens') || read(sessionStorage, 'lens');
+          root.dataset.lens = lenses.indexOf(lens) >= 0 ? lens : 'all';
+        }
+        apply();
+        document.addEventListener('astro:after-swap', apply);
+      })();
+    </script><link rel="stylesheet" href="/_astro/about.Ci4BUJYk.css"></head> <body> <a class="skip" href="#main">Skip to content</a> <header class="nav"> <a class="nav-name" href="/">megha<span>.</span></a> <nav aria-label="Main"> <a href="/work/"> Work </a><a href="/about/"> About </a><a href="/contact/" aria-current="page"> Say hi </a> </nav> <a class="nav-resume" href="/Megha_Pareek_Resume.pdf" download>Resume</a> <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Dark</button> </header> <main id="main">  <section class="wrap page-head"> <h1>Say hi</h1> <p class="lede">Email me directly or leave a message below. I read everything.</p> </section> <section class="wrap contact-grid"> <div class="contact-main" data-hue="coral" data-reveal> <p class="small-label">Email</p> <p class="contact-email"><a href="mailto:meghapareek2006@gmail.com">meghapareek2006@gmail.com</a></p> <p class="actions"> <button type="button" class="button" data-copy="meghapareek2006@gmail.com">Copy address</button> <a class="button is-plain" href="https://linkedin.com/in/pareek-megha" rel="noopener">LinkedIn</a> <a class="button is-plain" href="https://github.com/pareekmegha" rel="noopener">GitHub</a> <a class="button is-plain" href="/Megha_Pareek_Resume.pdf" download>Resume (PDF)</a> </p> <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" data-contact-form> <input type="hidden" name="access_key" value="aa2690fa-0ecd-484a-ad4e-51994a4d6825"> <input type="hidden" name="subject" value="Message from your portfolio"> <input type="checkbox" name="botcheck" class="trap" tabindex="-1" autocomplete="off"> <label>
+Your name
+<input type="text" name="name" required autocomplete="name"> </label> <label>
+Your email
+<input type="email" name="email" required autocomplete="email"> </label> <label>
+Message
+<textarea name="message" rows="5" required></textarea> </label> <button type="submit" class="button">Send message</button> <p class="note" data-form-status role="status"></p> </form> </div> <aside class="contact-side" data-hue="teal" data-reveal> <h2>What I'm looking for</h2> <p>Internships and roles as:</p> <ul class="pill-list"> <li>Data Analyst</li><li>Data Scientist</li><li>Data Engineer</li><li>AI Engineer</li><li>AI Consultant</li> </ul> <p>
+Based in Delhi. Remote, or on-site in Gurugram and Delhi NCR.
+</p> </aside> </section>  </main> <footer class="footer wrap"> <p> <a href="mailto:meghapareek2006@gmail.com">meghapareek2006@gmail.com</a> <a href="https://linkedin.com/in/pareek-megha" rel="noopener">LinkedIn</a> <a href="https://github.com/pareekmegha" rel="noopener">GitHub</a> <a href="/Megha_Pareek_Resume.pdf" download>Resume (PDF)</a> </p> <p>© 2026 Megha Pareek. The charts here are drawn from each project's own data.</p> </footer> <script type="module" src="/_astro/Base.astro_astro_type_script_index_0_lang.CUhWF_iY.js"></script> </body> </html>
