@@ -21,7 +21,7 @@ stats:
     label: R² after adding time of day and borough
 links:
   - label: Notebook and write-up on GitHub
-    href: https://github.com/Megha9306/uber-av-supply-shock-simulation
+    href: https://github.com/pareekmegha/uber-av-supply-shock-simulation
 method:
   - 6,170 zone-hour rows built from trip records
   - Time-of-day buckets plus borough fixed effects

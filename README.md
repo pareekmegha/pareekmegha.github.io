@@ -52,6 +52,6 @@ After re-running the UPI analysis, copy `master.json`, `forecast.json` and `bran
 npm run deploy
 ```
 
-This builds the site and publishes it to the `gh-pages` branch, which GitHub Pages serves at https://megha9306.github.io. Push source changes to `main` separately with `git push`.
+This builds the site and publishes it to the `gh-pages` branch, which GitHub Pages serves at https://pareekmegha.github.io. Push source changes to `main` separately with `git push`.
 
 To deploy automatically on every push instead, grant the GitHub CLI the workflow permission (`gh auth refresh -s workflow`), move `.github/deploy-workflow.yml.disabled` to `.github/workflows/deploy.yml`, and set the Pages source to GitHub Actions in the repository settings.

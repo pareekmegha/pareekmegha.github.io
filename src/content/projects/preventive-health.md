@@ -12,6 +12,11 @@ lens:
   analytics: 5
 tags: [Machine learning, Dashboard]
 stack: [Scikit-learn, XGBoost, Streamlit, Python]
+links:
+  - label: Try the live app
+    href: https://phis-health.streamlit.app/
+  - label: Code on GitHub
+    href: https://github.com/pareekmegha/PHIS
 ---
 
 ## What I built

@@ -29,6 +29,7 @@ const firstName = person.name.split(' ')[0];
       <p class="actions" data-enter style="--d:4">
         <a class="button" href="/work/">See all my work</a>
         <a class="button is-plain" href="/contact/">Say hi</a>
+        {person.resumeUrl && <a class="button is-plain" href={person.resumeUrl} download>Resume (PDF)</a>}
       </p>
     </div>
 

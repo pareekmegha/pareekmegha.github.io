@@ -22,9 +22,9 @@ stats:
     label: apps after merging 343 raw names
 links:
   - label: Open the full dashboard
-    href: https://megha9306.github.io/upi-payments-analysis/
+    href: https://pareekmegha.github.io/upi-payments-analysis/
   - label: Code and findings on GitHub
-    href: https://github.com/Megha9306/upi-payments-analysis
+    href: https://github.com/pareekmegha/upi-payments-analysis
 method:
   - 343 raw app names merged into 145 canonical apps with a reviewable alias map
   - Fixed a parser that blanked values with thousands separators

@@ -11,6 +11,9 @@ lens:
   ai: 4
 tags: [Pipeline, ETL]
 stack: [Python, ETL, Schema validation, Chunking]
+links:
+  - label: Code on GitHub
+    href: https://github.com/pareekmegha/matrimonial-etl-pipeline
 stats:
   - value: 92–95%
     label: extraction accuracy

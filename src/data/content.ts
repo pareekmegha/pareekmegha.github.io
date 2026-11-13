@@ -5,11 +5,11 @@ export const person = {
   name: 'Megha Pareek',
   email: 'meghapareek2006@gmail.com',
   linkedin: 'https://linkedin.com/in/pareek-megha',
-  github: 'https://github.com/Megha9306',
+  github: 'https://github.com/pareekmegha',
   location: 'Delhi',
   whereIWork: 'Remote, or on-site in Gurugram and Delhi NCR',
-  // Set to '/Megha_Pareek_Resume.pdf' once a PDF is placed in public/.
-  resumeUrl: null as string | null,
+  // The PDF in public/ is a web copy of the resume without the phone number.
+  resumeUrl: '/Megha_Pareek_Resume.pdf' as string | null,
   // Set to '/megha.jpg' once a portrait is placed in public/.
   photoUrl: '/megha.jpg' as string | null,
   // Access key from web3forms.com. It is meant to be public: it can only send mail to your own inbox.
@@ -53,8 +53,8 @@ export const evidence = [
 
 export const upi = {
   links: {
-    dashboard: 'https://megha9306.github.io/upi-payments-analysis/',
-    repo: 'https://github.com/Megha9306/upi-payments-analysis',
+    dashboard: 'https://pareekmegha.github.io/upi-payments-analysis/',
+    repo: 'https://github.com/pareekmegha/upi-payments-analysis',
   },
   steps: [
     {
@@ -93,7 +93,7 @@ export const upi = {
 };
 
 export const shock = {
-  links: { repo: 'https://github.com/Megha9306/uber-av-supply-shock-simulation' },
+  links: { repo: 'https://github.com/pareekmegha/uber-av-supply-shock-simulation' },
   title: 'A uniform supply cut does not hurt every hour equally.',
   body: 'When an AV partner leaves a market, part of the vehicle supply disappears overnight. Using 14.4 million NYC Uber trips as a proxy, I simulated the cut. The hours that were already thin on drivers take the largest hit.',
   method: [
@@ -112,7 +112,7 @@ export const shock = {
 };
 
 export const queue = {
-  links: { repo: 'https://github.com/Megha9306/Grocery-Checkout-Queue-Simulation-RL-Routing-Agent' },
+  links: { repo: 'https://github.com/pareekmegha/Grocery-Checkout-Queue-Simulation-RL-Routing-Agent' },
   title: 'Can a simple RL agent beat two sensible queue rules? Sometimes.',
   body: 'A from-scratch simulation of grocery checkout. Customers arrive, get routed to a counter, and leave without buying if the wait exceeds their patience. A tabular Q-learning agent is trained to protect high-value carts, then compared against two hand-written rules on identical customer streams.',
   results: [

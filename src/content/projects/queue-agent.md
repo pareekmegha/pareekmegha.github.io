@@ -21,7 +21,7 @@ stats:
     label: training episodes in the longest run
 links:
   - label: Notebook on GitHub
-    href: https://github.com/Megha9306/Grocery-Checkout-Queue-Simulation-RL-Routing-Agent
+    href: https://github.com/pareekmegha/Grocery-Checkout-Queue-Simulation-RL-Routing-Agent
 limits:
   - Simulation only. Service times, patience and arrivals are modelled, not fit to real point-of-sale data.
   - Tabular Q-learning needs manual state buckets, which caps how rich the state can get.

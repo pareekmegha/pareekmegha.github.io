@@ -70,6 +70,7 @@ const links = [
           ))
         }
       </nav>
+      {person.resumeUrl && <a class="nav-resume" href={person.resumeUrl} download>Resume</a>}
       <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Dark</button>
     </header>
 
@@ -82,6 +83,7 @@ const links = [
         <a href={`mailto:${person.email}`}>{person.email}</a>
         <a href={person.linkedin} rel="noopener">LinkedIn</a>
         <a href={person.github} rel="noopener">GitHub</a>
+        {person.resumeUrl && <a href={person.resumeUrl} download>Resume (PDF)</a>}
       </p>
       <p>© {new Date().getFullYear()} {person.name}. The charts here are drawn from each project's own data.</p>
     </footer>
