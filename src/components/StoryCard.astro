@@ -1,0 +1,34 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { kindLabels } from '../data/content';
+import Art from './Art.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const { data } = project;
+---
+
+<a
+  class="story-card"
+  href={`/work/${project.id}/`}
+  data-hue={data.hue}
+  data-card
+  data-order={data.order}
+  data-rank-analytics={data.lens.analytics}
+  data-rank-science={data.lens.science}
+  data-rank-engineering={data.lens.engineering}
+  data-rank-ai={data.lens.ai}
+  data-tags={data.tags.join('|')}
+  data-kind={data.kind}
+  transition:name={`card-${project.id}`}
+>
+  <span class="story-card-top">
+    <span class="story-card-art"><Art name={data.art} /></span>
+    <span class="kind-badge" data-kind={data.kind}>{kindLabels[data.kind]}</span>
+  </span>
+  <strong class="story-card-question">{data.question}</strong>
+  <span class="story-card-summary">{data.summary}</span>
+  <span class="story-card-go">Read the story <span aria-hidden="true">→</span></span>
+</a>

@@ -1,0 +1,82 @@
+:root {
+  --font-display: 'Bricolage Grotesque Variable', 'Trebuchet MS', system-ui, sans-serif;
+  --font-body: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
+
+  --wrap: 1120px;
+  --gutter: clamp(16px, 4vw, 40px);
+
+  --teal: #12a39b;
+  --coral: #f2634a;
+  --plum: #8e4fc0;
+  --mustard: #f0b323;
+  --leaf: #4aa85a;
+  --sky: #3d7cf0;
+  --rose: #e2528f;
+
+  color-scheme: light;
+  --bg: #fff7ea;
+  --paper: #ffffff;
+  --ink: #221b33;
+  --muted: #655d73;
+  --line: #dccfb6;
+  --grid: #efe5d2;
+  --bad: #d62839;
+  --muted-line: #b5ab9a;
+  --surface-2: #f6ecda;
+
+  /* Every project sets --hue through data-hue; this is the fallback. */
+  --hue: var(--coral);
+  --tint: color-mix(in srgb, var(--hue) 15%, var(--paper));
+  --marker: color-mix(in srgb, var(--hue) 45%, var(--bg));
+
+  /* Names the chart and canvas code reads. */
+  --s1: var(--hue);
+  --s2: var(--coral);
+  --ink-line: var(--ink);
+  --text: var(--ink);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #1a1524;
+  --paper: #251e33;
+  --ink: #f8f0e3;
+  --muted: #b6acc6;
+  --line: #40364f;
+  --grid: #30283f;
+  --bad: #ff7b7b;
+  --muted-line: #6f6582;
+  --surface-2: #30283f;
+}
+
+[data-hue='teal'] {
+  --hue: var(--teal);
+}
+[data-hue='coral'] {
+  --hue: var(--coral);
+  --s2: var(--sky);
+}
+[data-hue='plum'] {
+  --hue: var(--plum);
+}
+[data-hue='mustard'] {
+  --hue: var(--mustard);
+  --s2: var(--sky);
+}
+[data-hue='leaf'] {
+  --hue: var(--leaf);
+}
+[data-hue='sky'] {
+  --hue: var(--sky);
+}
+[data-hue='rose'] {
+  --hue: var(--rose);
+  --s2: var(--sky);
+}
+
+/* Custom properties that depend on --hue must be recomputed wherever --hue changes. */
+[data-hue] {
+  --tint: color-mix(in srgb, var(--hue) 15%, var(--paper));
+  --marker: color-mix(in srgb, var(--hue) 45%, var(--bg));
+  --s1: var(--hue);
+}

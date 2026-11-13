@@ -1,0 +1,119 @@
+---
+import { getCollection, render } from 'astro:content';
+import Art from '../../components/Art.astro';
+import QueueLab from '../../components/exhibits/QueueLab.astro';
+import Toolkit from '../../components/exhibits/Toolkit.astro';
+import ShockSlider from '../../components/exhibits/ShockSlider.astro';
+import UpiStory from '../../components/exhibits/UpiStory.astro';
+import { kindLabels, person } from '../../data/content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+  return projects.map((project, index) => ({
+    params: { slug: project.id },
+    props: { project, next: projects[(index + 1) % projects.length] },
+  }));
+}
+
+const { project, next } = Astro.props;
+const { data } = project;
+const { Content } = await render(project);
+---
+
+<Base title={`${data.title} · ${person.name}`} description={data.summary}>
+  <article data-hue={data.hue}>
+    <header class="project-head wrap" transition:name={`card-${project.id}`}>
+      <div>
+        <p class="project-kind">
+          <a href="/work/">← All work</a>
+          <span class="kind-badge" data-kind={data.kind}>{kindLabels[data.kind]}</span>
+          {data.year && <span>{data.year}</span>}
+        </p>
+        <h1>{data.question}</h1>
+        <p class="lede">{data.summary}</p>
+      </div>
+      <span class="project-art"><Art name={data.art} /></span>
+    </header>
+
+    {
+      data.stats.length > 0 && (
+        <dl class="stat-row wrap" data-reveal>
+          {data.stats.map((stat) => (
+            <div>
+              <dt>{stat.value}</dt>
+              <dd>{stat.label}</dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
+
+    <div class="wrap">
+      {data.exhibit === 'upi' && <UpiStory />}
+      {data.exhibit === 'shock' && <ShockSlider />}
+      {data.exhibit === 'queue' && <QueueLab />}
+      {data.exhibit === 'toolkit' && <Toolkit />}
+    </div>
+
+    <div class="wrap project-body" data-reveal>
+      <div class="prose">
+        <Content />
+      </div>
+      <aside class="project-side">
+        <h2>Built with</h2>
+        <ul class="pill-list is-small">
+          {data.stack.map((item) => <li>{item}</li>)}
+        </ul>
+        {
+          data.method.length > 0 && (
+            <>
+              <h2>How I did it</h2>
+              <ul class="tick-list">
+                {data.method.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </>
+          )
+        }
+        {
+          data.links.length > 0 && (
+            <>
+              <h2>See it</h2>
+              <ul class="link-list">
+                {data.links.map((link) => (
+                  <li>
+                    <a href={link.href} rel="noopener">
+                      {link.label} →
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )
+        }
+      </aside>
+    </div>
+
+    {
+      data.limits.length > 0 && (
+        <section class="wrap limits" data-reveal>
+          <h2>What this can't tell you</h2>
+          <ul>
+            {data.limits.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </article>
+
+  <nav class="wrap next" aria-label="Next project" data-hue={next.data.hue} data-reveal>
+    <a href={`/work/${next.id}/`}>
+      <span>Next story</span>
+      <strong>{next.data.question}</strong>
+    </a>
+  </nav>
+</Base>

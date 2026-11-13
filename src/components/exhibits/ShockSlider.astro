@@ -1,0 +1,21 @@
+<div class="exhibit" data-exhibit="shock">
+  <p class="exhibit-hint">Drag the slider to remove vehicles from the road and watch the wait change hour by hour.</p>
+  <div class="panel shock-panel">
+    <div class="control">
+      <label for="shock-slider">Vehicle supply removed</label>
+      <output data-out="shock" for="shock-slider">20%</output>
+      <input id="shock-slider" data-slider type="range" min="5" max="30" step="1" value="20" />
+    </div>
+    <div class="chart-host" data-chart></div>
+    <div class="shock-lower">
+      <div>
+        <p class="small-label">Increase in wait by hour, midnight to 11 pm</p>
+        <div class="bars" data-bars aria-hidden="true"></div>
+      </div>
+      <dl class="readouts">
+        <div><dt>Overnight, 9 pm – 5 am</dt><dd data-out="night">+0%</dd></div>
+        <div><dt>Midday, 10 am – 4 pm</dt><dd data-out="midday">+0%</dd></div>
+      </dl>
+    </div>
+  </div>
+</div>

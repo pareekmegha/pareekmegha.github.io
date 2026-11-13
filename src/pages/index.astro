@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content';
+import Art from '../components/Art.astro';
+import LensSwitch from '../components/LensSwitch.astro';
+import StoryCard from '../components/StoryCard.astro';
+import { lenses, lookingFor, person } from '../data/content';
+import Base from '../layouts/Base.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const firstName = person.name.split(' ')[0];
+---
+
+<Base
+  title={`${person.name} · Data and AI`}
+  description="Megha Pareek works across data analysis, data science, data engineering and AI. Every project starts with a question and has something to play with."
+>
+  <section class="intro wrap">
+    <div class="intro-text">
+      <h1 data-enter style="--d:0">Hi, I'm {firstName}.</h1>
+      <div class="lens-lines" data-enter style="--d:1">
+        {lenses.map((lens) => <p data-lens-line={lens.id}>{lens.line}</p>)}
+      </div>
+      <p class="intro-school" data-enter style="--d:2">
+        I'm studying Data Science & AI at Masters' Union and IIT Guwahati.
+      </p>
+      <div data-enter style="--d:3">
+        <LensSwitch />
+      </div>
+      <p class="actions" data-enter style="--d:4">
+        <a class="button" href="/work/">See all my work</a>
+        <a class="button is-plain" href="/contact/">Say hi</a>
+      </p>
+    </div>
+
+    <div class="intro-photo" data-enter style="--d:2">
+      <div class="photo-frame">
+        {
+          person.photoUrl ? (
+            <img src={person.photoUrl} alt={`Portrait of ${person.name}`} width="900" height="1200" />
+          ) : (
+            <span class="photo-missing">Your photo goes here</span>
+          )
+        }
+      </div>
+      <span class="sticker sticker-a" data-hue="teal"><Art name="coins" /></span>
+      <span class="sticker sticker-b" data-hue="coral"><Art name="taxi" /></span>
+      <span class="sticker sticker-c" data-hue="plum"><Art name="trolley" /></span>
+    </div>
+  </section>
+
+  <section class="wrap block">
+    <header class="block-head" data-reveal>
+      <h2>Start with these</h2>
+      <p>Three picked for the area chosen above. Change the switch and they change with it.</p>
+    </header>
+    <div class="card-grid" data-lens-grid data-limit="3">
+      {projects.map((project) => <StoryCard project={project} />)}
+    </div>
+    <p class="more" data-reveal><a href="/work/">All {projects.length} projects →</a></p>
+  </section>
+
+  <section class="wrap block" data-hue="teal">
+    <div class="quick" data-exhibit="upi-mini" data-reveal>
+      <div class="quick-text">
+        <p class="small-label">One chart before you click anything</p>
+        <h2>India's average UPI payment fell by a third. Nobody is paying less.</h2>
+        <p>
+          Person-to-person payments stayed flat and merchant payments rose. Small merchant payments simply became most
+          of the mix, which drags the average down.
+        </p>
+        <p><a href="/work/upi-payments/">Walk through the full story →</a></p>
+      </div>
+      <figure class="panel">
+        <figcaption class="panel-head">Average UPI payment (₹), April 2020 to October 2026</figcaption>
+        <div class="chart-host" data-chart></div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wrap block looking" data-reveal>
+    <h2>Looking for internships and roles as</h2>
+    <ul class="pill-list">
+      {lookingFor.map((role) => <li>{role}</li>)}
+    </ul>
+    <p class="actions">
+      <a class="button" href="/contact/">Get in touch</a>
+      <a class="button is-plain" href="/about/">More about me</a>
+    </p>
+  </section>
+</Base>

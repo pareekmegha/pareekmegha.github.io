@@ -1,0 +1,14 @@
+---
+import { lenses } from '../data/content';
+---
+
+<div class="lens" role="group" aria-label="Show my work in this area">
+  <span class="lens-label">Show my work in</span>
+  {
+    lenses.map((lens) => (
+      <button type="button" data-lens-pick={lens.id} aria-pressed={lens.id === 'all' ? 'true' : 'false'}>
+        {lens.label}
+      </button>
+    ))
+  }
+</div>

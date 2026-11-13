@@ -1,0 +1,175 @@
+---
+import { awards, education, evidence, experience, lensSkillGroups, person, quotes, skills } from '../data/content';
+import Base from '../layouts/Base.astro';
+
+const firstName = person.name.split(' ')[0];
+const jobLinks: Record<string, string> = { grapes: '/work/grapes-worldwide/', dandelion: '/work/dandelion/' };
+// For each skill group, the lenses that bring it forward.
+const lensesFor = (group: string) =>
+  Object.entries(lensSkillGroups)
+    .filter(([, groups]) => groups.includes(group))
+    .map(([lens]) => lens)
+    .join(' ');
+---
+
+<Base title={`About · ${person.name}`} description={`Who ${firstName} is, where she has worked, and what she knows.`}>
+  <section class="wrap page-head about-head">
+    <div>
+      <h1>About me</h1>
+      <p class="lede">
+        I'm {firstName}, a Data Science & AI undergraduate at Masters' Union and IIT Guwahati. I've worked on data
+        analytics, business intelligence, ETL pipelines and machine learning, and I co-founded an AI learning product
+        along the way.
+      </p>
+      <p>
+        Most of my projects end with a section on what the data can't tell you. It started as a habit and turned into
+        the part I care about most.
+      </p>
+    </div>
+    <div class="photo-frame is-small">
+      {
+        person.photoUrl ? (
+          <img src={person.photoUrl} alt={`Portrait of ${person.name}`} width="900" height="1200" loading="lazy" />
+        ) : (
+          <span class="photo-missing">Your photo goes here</span>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="wrap block">
+    <h2 data-reveal>Where I've worked</h2>
+    <ol class="timeline">
+      {
+        experience.map((job) => (
+          <li data-reveal data-hue={job.id === 'grapes' ? 'mustard' : 'leaf'}>
+            <p class="timeline-when">{job.dates}</p>
+            <div>
+              <h3>
+                {job.role}, {job.org}
+              </h3>
+              <ul>
+                {job.points.map((point) => (
+                  <li>{point}</li>
+                ))}
+              </ul>
+              <p>
+                <a href={jobLinks[job.id]}>Read the full story →</a>
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="wrap block two-up">
+    <div data-reveal>
+      <h2>Studying</h2>
+      <ul class="plain">
+        {
+          education.map((e) => (
+            <li>
+              <strong>{e.school}</strong>
+              <span>
+                {e.degree}, {e.dates}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div data-reveal>
+      <h2>Awards</h2>
+      <ul class="plain">
+        {
+          awards.map((a) => (
+            <li>
+              {a.image && <img src={a.image} alt="" width="96" height="96" loading="lazy" />}
+              <strong>{a.title}</strong>
+              <span>{a.detail}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap block">
+    <header class="block-head" data-reveal>
+      <h2>What I know, and where I used it</h2>
+      <p>The number on each skill is how many projects on this site use it. Click one to see which.</p>
+    </header>
+    <div class="skills" data-skills data-reveal>
+      <div class="skill-groups">
+        {
+          skills.map((group) => (
+            <div class="skill-group" data-lenses={lensesFor(group.group)}>
+              <h3>{group.group}</h3>
+              <ul>
+                {group.items
+                  .filter((item) => item.used.length > 0)
+                  .sort((a, b) => b.used.length - a.used.length)
+                  .map((item) => (
+                    <li>
+                      <button type="button" class="skill" data-used={item.used.join(' ')} aria-pressed="false">
+                        {item.name}
+                        <span class="skill-count" aria-label={`used in ${item.used.length} projects`}>
+                          {item.used.length}
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+              </ul>
+              {group.items.some((item) => item.used.length === 0) && (
+                <p class="skill-also">
+                  Also:{' '}
+                  {group.items
+                    .filter((item) => item.used.length === 0)
+                    .map((item) => item.name)
+                    .join(', ')}
+                </p>
+              )}
+            </div>
+          ))
+        }
+      </div>
+      <aside class="proofs" aria-label="Projects">
+        <p class="small-label">Used in</p>
+        {
+          evidence.map((e) => (
+            <a href={e.href} data-proof={e.id}>
+              {e.label}
+            </a>
+          ))
+        }
+      </aside>
+    </div>
+  </section>
+
+  {
+    quotes.length > 0 && (
+      <section class="wrap block">
+        <h2 data-reveal>What people say</h2>
+        <div class="quotes" data-reveal>
+          {quotes.map((q) => (
+            <figure>
+              <blockquote>{q.text}</blockquote>
+              <figcaption>
+                {q.name}, {q.role}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <section class="wrap block looking" data-reveal>
+    <h2>Want to talk?</h2>
+    <p class="actions">
+      <a class="button" href="/contact/">Say hi</a>
+      {person.resumeUrl && <a class="button is-plain" href={person.resumeUrl} download>Resume (PDF)</a>}
+    </p>
+  </section>
+</Base>

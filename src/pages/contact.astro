@@ -1,0 +1,59 @@
+---
+import { lookingFor, person } from '../data/content';
+import Base from '../layouts/Base.astro';
+---
+
+<Base title={`Say hi · ${person.name}`} description={`How to reach ${person.name}, and the roles she is open to.`}>
+  <section class="wrap page-head">
+    <h1>Say hi</h1>
+    <p class="lede">Email me directly or leave a message below. I read everything.</p>
+  </section>
+
+  <section class="wrap contact-grid">
+    <div class="contact-main" data-hue="coral" data-reveal>
+      <p class="small-label">Email</p>
+      <p class="contact-email"><a href={`mailto:${person.email}`}>{person.email}</a></p>
+      <p class="actions">
+        <button type="button" class="button" data-copy={person.email}>Copy address</button>
+        <a class="button is-plain" href={person.linkedin} rel="noopener">LinkedIn</a>
+        <a class="button is-plain" href={person.github} rel="noopener">GitHub</a>
+        {person.resumeUrl && <a class="button is-plain" href={person.resumeUrl} download>Resume (PDF)</a>}
+      </p>
+
+      {
+        person.formKey && (
+          <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" data-contact-form>
+            <input type="hidden" name="access_key" value={person.formKey} />
+            <input type="hidden" name="subject" value="Message from your portfolio" />
+            <input type="checkbox" name="botcheck" class="trap" tabindex="-1" autocomplete="off" />
+            <label>
+              Your name
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+            <label>
+              Your email
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+            <label>
+              Message
+              <textarea name="message" rows="5" required />
+            </label>
+            <button type="submit" class="button">Send message</button>
+            <p class="note" data-form-status role="status" />
+          </form>
+        )
+      }
+    </div>
+
+    <aside class="contact-side" data-hue="teal" data-reveal>
+      <h2>What I'm looking for</h2>
+      <p>Internships and roles as:</p>
+      <ul class="pill-list">
+        {lookingFor.map((role) => <li>{role}</li>)}
+      </ul>
+      <p>
+        Based in {person.location}. {person.whereIWork}.
+      </p>
+    </aside>
+  </section>
+</Base>

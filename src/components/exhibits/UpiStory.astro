@@ -1,0 +1,26 @@
+---
+import { upi } from '../../data/content';
+---
+
+<div class="exhibit" data-exhibit="upi">
+  <p class="exhibit-hint">Scroll through four findings. The chart redraws from the same data files as the dashboard.</p>
+  <div class="story">
+    <div class="story-chart panel">
+      <p class="panel-head"><span data-caption>Monthly UPI transactions (billions)</span></p>
+      <div class="chart-host" data-chart></div>
+    </div>
+    <div class="story-steps">
+      {
+        upi.steps.map((step, i) => (
+          <article class="step" data-step={i}>
+            <p class="step-count">
+              {i + 1} of {upi.steps.length}
+            </p>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</div>

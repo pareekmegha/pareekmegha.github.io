@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import LensSwitch from '../../components/LensSwitch.astro';
+import StoryCard from '../../components/StoryCard.astro';
+import { kindLabels, person } from '../../data/content';
+import Base from '../../layouts/Base.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const tags = [...new Set(projects.flatMap((p) => p.data.tags))].sort();
+const kinds = (Object.keys(kindLabels) as (keyof typeof kindLabels)[]).filter((kind) =>
+  projects.some((p) => p.data.kind === kind),
+);
+---
+
+<Base title={`Work · ${person.name}`} description="Every project: data analysis, simulations, pipelines and AI products.">
+  <section class="wrap page-head">
+    <h1>All my work</h1>
+    <p class="lede">Each one starts with a question. Pick an area and the most relevant ones move to the front.</p>
+    <LensSwitch />
+    <div class="tags is-kind" role="group" aria-label="Filter by type of work">
+      <button type="button" data-kind-pick="" aria-pressed="true">Any type</button>
+      {kinds.map((kind) => <button type="button" data-kind-pick={kind} aria-pressed="false">{kindLabels[kind]}</button>)}
+    </div>
+    <div class="tags" role="group" aria-label="Filter by topic">
+      <button type="button" data-tag-pick="" aria-pressed="true">Any topic</button>
+      {tags.map((tag) => <button type="button" data-tag-pick={tag} aria-pressed="false">{tag}</button>)}
+    </div>
+  </section>
+
+  <section class="wrap block is-tight">
+    <div class="card-grid" data-lens-grid>
+      {projects.map((project) => <StoryCard project={project} />)}
+    </div>
+    <p class="empty" data-empty hidden>Nothing matches those filters yet.</p>
+  </section>
+</Base>

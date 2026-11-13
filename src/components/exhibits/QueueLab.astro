@@ -1,0 +1,95 @@
+---
+import { queue } from '../../data/content';
+---
+
+<div class="exhibit" data-exhibit="queue">
+  <p class="exhibit-hint">Pick a routing rule, change how busy the store is, or train the agent yourself.</p>
+  <div class="queue-grid">
+    <figure class="panel">
+      <figcaption class="panel-head">Each dot is a customer. Bigger dot, bigger cart. Red ones gave up and left.</figcaption>
+      <canvas data-canvas aria-label="Animated simulation of customers being routed to two checkout counters"></canvas>
+      <dl class="panel-stats">
+        <div><dt>Served</dt><dd data-stat="served">0</dd></div>
+        <div><dt>Walked out</dt><dd data-stat="balked">0%</dd></div>
+        <div><dt>Avg wait</dt><dd data-stat="wait">0.00 min</dd></div>
+        <div><dt>Profit lost</dt><dd data-stat="lost">$0</dd></div>
+      </dl>
+    </figure>
+
+    <div class="queue-controls">
+      <div class="control-group">
+        <p class="small-label">Routing rule</p>
+        <div class="segmented">
+          <button type="button" data-policy="queue" aria-pressed="true">Shortest queue</button>
+          <button type="button" data-policy="wait" aria-pressed="false">Shortest wait</button>
+          <button type="button" data-policy="rl" aria-pressed="false" disabled>Q-learning agent</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <p class="small-label">Arrivals per minute</p>
+        <div class="segmented">
+          <button type="button" data-rate="0.6" aria-pressed="false">Quiet 0.6</button>
+          <button type="button" data-rate="1.4" aria-pressed="true">Steady 1.4</button>
+          <button type="button" data-rate="2" aria-pressed="false">Rush 2.0</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <p class="small-label">Train the agent yourself</p>
+        <button type="button" class="button" data-train>Train 8,000 episodes</button>
+        <div class="train-bar"><div data-progress></div></div>
+        <p class="note" data-train-status>
+          Runs in a background thread on your device, then scores all three rules on the same 500 customer streams.
+        </p>
+        <p class="small-label">Average wait per 250 training episodes</p>
+        <div class="chart-host" data-curve></div>
+        <table class="mini-table" data-result hidden>
+          <caption>This run, in your browser. Mean total reward over 500 paired streams (higher is better).</caption>
+          <tbody>
+            <tr><th scope="row">Q-learning agent</th><td data-r="rl"></td></tr>
+            <tr><th scope="row">Shortest queue</th><td data-r="queue"></td></tr>
+            <tr><th scope="row">Shortest wait</th><td data-r="wait"></td></tr>
+            <tr><th scope="row">Agent vs shortest queue</th><td data-r="vsQueue"></td></tr>
+            <tr><th scope="row">Agent vs shortest wait</th><td data-r="vsWait"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3>Results from the notebook</h3>
+      <div class="table-scroll">
+        <table class="results">
+          <thead>
+            <tr><th>Scenario</th><th>Episodes</th><th>vs shortest queue</th><th>vs shortest wait</th></tr>
+          </thead>
+          <tbody>
+            {
+              queue.results.map((r) => (
+                <tr>
+                  <td>{r.scenario}</td>
+                  <td>{r.episodes}</td>
+                  <td>{r.vsQueue}</td>
+                  <td>{r.vsWait}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <h3>Three bugs I caught before trusting it</h3>
+      <ol class="bugs">
+        {
+          queue.bugs.map((b) => (
+            <li>
+              <strong>{b.name}.</strong> {b.text}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</div>

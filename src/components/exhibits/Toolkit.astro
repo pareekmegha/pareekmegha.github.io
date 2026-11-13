@@ -1,0 +1,21 @@
+---
+import { toolkit } from '../../data/content';
+---
+
+<div class="exhibit">
+  <p class="exhibit-hint">Six tools I built on my own. Five do one job each, and the sixth brings them together.</p>
+  <ul class="toolkit">
+    {
+      toolkit.tools.map((tool, i) => (
+        <li style={`--i:${i}`}>
+          <strong>{tool.name}</strong>
+          <span>{tool.detail}</span>
+        </li>
+      ))
+    }
+    <li class="toolkit-hub" style={`--i:${toolkit.tools.length}`}>
+      <strong>{toolkit.hub.name}</strong>
+      <span>{toolkit.hub.detail}</span>
+    </li>
+  </ul>
+</div>
